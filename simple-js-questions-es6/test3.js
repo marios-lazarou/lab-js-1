@@ -5,6 +5,36 @@ function showLuckyNumber(doubleIt) {
   console.log(`${dateNow} - The lucky number is ${luckyNumber} ${winningsText}`);
 }
 
-// 1. Create a function that will call showLuckyNumber every 5 seconds
-// 2. Create a function that will call showLuckyNumber every 10 seconds and will pass it a value true (doubleIt to be true)
-// 3. After 30 seconds, both functions should stop
+function firstFunction (toBeShown) {
+  const timeInterval = 5000;
+  let timer = 0;
+  const interval = setInterval(() => {
+    this.showLuckyNumber(toBeShown);
+    timer += timeInterval;
+    if (this.clearInterval(interval, timer)) {
+      return;
+    }
+  }, timeInterval);
+};
+
+function secondFunction() {
+  const timeInterval = 10000;
+  let timer = 0;
+  const interval = setInterval(() => {
+    this.showLuckyNumber(true);
+    timer += timeInterval;
+    if (this.clearInterval(interval, timer)) {
+      return;
+    }
+  }, timeInterval);
+};
+
+function clearInterval(interval, timer) {
+  if ((timer && typeof timer === 'number') && interval) {
+    if (timer === 30000 || timer > 30000) {
+      clearInterval(interval);
+      return true;
+    }
+  }
+  return false;
+};

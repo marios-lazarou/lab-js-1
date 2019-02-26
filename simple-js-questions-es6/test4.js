@@ -13,18 +13,17 @@ const customConfiguration = {
 };
 
 
-// 1. Create a configuration object that uses the templateConfiguration as a base
-// and overrides any existing options as specified in customConfiguration
-// the result oboject should looke like this:
+/*
+ * 1) The assign() function is used to copy the values of all enumerable own properties from one or more source 
+ * objects to a target object.
+ */
 
-// {
-//   preferredFormat: 'pdf',
-//   language: 'es',
-//   showCompanyLogo: true,
-//   showPageNumbers: false,
-//   fontSize: 14,
-// };
+const returnedTarget = Object.assign({}, templateConfiguration, customConfiguration);
 
+/*
+ * 2) The seal() method seals an object, preventing any new properties
+ * from being add to it marking all existing properties as non-configurable.  Though values of present properties
+ * can still be changed as long as they are writable.
+ */
 
-// 2. (optional) If we wanted to ensure that no other properties would be added or removed in the templateConfiguration object
-// how would we do that using only built-in JS functionality?
+Object.seal(templateConfiguration);

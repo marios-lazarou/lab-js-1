@@ -1,23 +1,51 @@
-const getSumAsync = async (num1, num2) => {
+/* 
+ * 1) The problem here is that we are returning the content of the 'getSumAsync' function, which is a promise 
+ * without unwrapping the promise's content. Since the promise has not being resolved or rejected, its status remains
+ * as pending.  The way to solve this problem is to use the 'then()' function upon recieving the promise in order to
+ * get the result of the calculation (or error in case one occurs), and therefor handle it appropriatelly - print it out.
+ */
+
+getSumAsync = async (num1, num2) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve(num1 + num2);
     }, 3000);
   });
-};
+}
+
+getProdAsync = async (num1, num2) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(num1 + num2);
+    }, 2000);
+  });
+}
 
 
-const start = () => {
-
-  const sum = getSumAsync(3, 5);
-  console.log('The sum was: ', sum);
-
-  // We expect that sum will have the value 8, after 3 seconds, but what we see printed in the console is:
-  // The sum was:  Promise {<pending>}
-  // 1. What did we do wrong? How can it be fixed?
-  // 2. Create another async function, getProdAsync, which returns the multiplication result of the 2 numbers
-  //    and returns the result in 2 seconds
-  // 3. Call both async functions and return the result of whichever function returns first  (optional)
+start = () => {
+  return new Promise((resolve, reject) => {
+    getSumAsync(3, 5).then((result) => {
+      return result &&
+        typeof result === 'number' ?
+        resolve(result) :
+        reject();
+    });
+    getProdAsync(5, 5).then((result) => {
+      return result &&
+        typeof result === 'number' ?
+        resolve(result) :
+        reject();
+    });
+  }).then(
+    (response) => {
+      console.log('The sum was: ', response);
+      return response;
+    },
+    () => {
+      return 'Error';
+    }).catch((exception) => {
+    return exception;
+  });
 }
 
 

@@ -1,5 +1,7 @@
-// 1. Create a function called duplicate
-// that given an array input, it will return a new duplicate array
+function duplicate(array) {
+    return array && Array.isArray(array) && array.length > 0 ?
+        array.concat(Array.from(array)) :
+        'Error';
+}
 
 duplicate([1, 2, 3]);
-// Returns ==>  [1, 2, 3, 1, 2, 3]
